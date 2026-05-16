@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'reports/css/style.css' %}">
+    <title>Pole Detail</title>
+</head>
+<body>
+    <header class="main-header">
+
+        <div class="logo-section">
+            <h2>⚡ Grameen Light</h2>
+        </div>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="#">Dashboard</a>
+            <a href="{% url 'track_complaint' %}">Track Complaint</a>
+            <a href="{% url 'about' %}">About</a>
+        </nav>
+
+        <button id="theme-toggle">
+            Toggle Theme
+        </button>
+
+    </header>
+
+    <div class="main-content">
+        <div class="card">
+            <h1>{{ pole.pole_id }}</h1>
+            <p>
+                <strong>Street:</strong>
+                {{ pole.street_name}}
+            </p>
+            <p>
+                <strong>Full Address:</strong>
+                {{ pole.full_address }}
+            </p>
+            {% if pole.pole_image %}
+                <h3>Pole Image</h3>
+                <img src="{{ pole.pole_image.url }}" width="300" style="border-radius:10px;">
+            {% endif %}
+            {% if pole.pole_number_image %}
+                <h3>Pole Number Image</h3>
+                <img src="{{ pole.pole_number_image.url }}" width="300" style="border-radius:10px;">
+            {% endif %}        
+            <p> 
+                <strong>status:</strong>
+                {% if pole.status == 'working' %}
+                    <span class="status-working">
+                        Working
+                    </span>
+                {% elif pole.status == 'fused' %}
+                    <span class="status-fused">
+                        Fused
+                    </span> 
+                {% else %}
+                    <span class="status-day">
+                        Burning During Day
+                    </span>
+                {% endif %}
+            </p>
+        </div> 
+
+        <div class="card">
+            {% if complaint_id %}
+                <h2>Complaint Submitted Successfully</h2>
+                    <p>
+                        <strong>Your Complaint Id:</strong>
+                        {{ complaint_id }}
+                    </p>
+            {% endif %}
+        </div>
+
+        <div class="card">  
+            <h2>Report Issue:</h2>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+            <button type="button" onclick="getlocation()">
+                Use Current Location
+            </button>
+                <button type="submit">
+                    Submit Report
+                </button>
+            </form>
+        </div> 
+    
+        <div class="card">
+            <h2>Repair Tracker</h2>
+
+            {% for report in reports %}
+                <div>
+                    <p>
+                        <strong>Complaint ID:</strong>
+                        {{ report.complaint_id }}
+                    </p>
+
+                    <p>
+                        <strong>Reported Issue:</strong>
+
+                            {% if report.reported_status == 'working' %}
+                                <span class="status-working">
+                                    Working
+                                </span>
+
+                            {% elif report.reported_status == 'fused' %}
+                                <span class="status-fused">
+                                    Fused
+                                </span>
+
+                            {% else %}
+                                <span class="status-day">
+                                    Burning During Day
+                                </span>
+                            {% endif %}
+                    </p>
+
+                    <p>
+                        <strong>Reported At:</strong>
+                        {{ report.reported_at }}
+                    </p>
+                    <p>
+                        <strong>Repair Status:</strong>
+                        {{ report.repair_status }}
+                    </p>
+                    <hr>
+                </div>
+
+            {% empty %}
+
+                <p>No reports yet</p>
+            {% endfor %}    
+        </div>
+        {% if pole.latitude and pole.longitude %}
+
+            <div class="card">
+                <h2>Loaction Map</h2>
+                <iframe width="100%" height="300" style="border:0; border-radius:12px;" loading="lazy" allowfullscreen
+                    src="https://maps.google.com/maps?q={{ pole.latitude }},{{ pole.longitude }}&z=18&output=embed">
+                </iframe>
+            </div>    
+        {% endif %}
+        <script>
+            function getlocation(){
+                navigator.geolocation.getCurrentPosition(
+                    function(position){
+                        document.getElementById('latitude').value =
+                            position.coords.latitude;
+                        document.getElementById('longitude').value = 
+                            position.coords.longitude;
+                    
+                        alert("Location captured successfully!");
+                    },
+                    function(){
+                        alert("Unable to get location.")
+                    }
+                );
+            }
+        </script>
+        </div>
+
+        <footer class="main-footer">
+        <div class="footer-left">
+            <div class="footer-links">
+                <a href="{% url 'about' %}">About</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+
+        <div class="footer-center">
+            <div class="footer-credit">
+                Built by Sahana <br>
+                   1RR22CS136
+            </div>
+        </div>
+
+        <div class="footer-right">
+            <h3>⚡ Grameen Light</h3>
+            <div class="footer-tagline">
+                Smart Village Streetlight Monitoring System
+            </div>
+        </div>
+
+    </footer>
+    <script src="{% static 'reports/js/theme.js' %}"></script>
+</body>
+</html>

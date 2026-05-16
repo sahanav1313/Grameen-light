@@ -1,0 +1,162 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Grameen Light</title>
+
+    <link rel="stylesheet" href="{% static 'reports/css/style.css' %}">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="logo-section">
+            <h2>⚡ Grameen Light</h2>
+        </div>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="#">Dashboard</a>
+            <a href="{% url 'track_complaint' %}">Track Complaint</a>
+            <a href="{% url 'about' %}">About</a>
+        </nav>
+
+        <button id="theme-toggle">
+            Toggle Theme
+        </button>
+
+    </header>
+
+    <div class="main-content about-page">
+        <div class="about-hero">
+            <h1>⚡ About Grameen Light</h1>
+            <p>
+                A Smart Village Streetlight Monitoring System designed to help
+                citizens report fused or power-wasting streetlights quickly and efficiently.
+            </p>
+        </div>
+
+        <!-- Problem Statement -->
+        <div class="card about-card">
+            <h2>🚨 Problem Statement</h2>
+            <p>
+                Streetlights in villages often remain ON during the day due to manual error,
+                wasting electricity. Sometimes fused lights remain OFF for weeks because the
+                Panchayat office is unaware of the issue.
+            </p>
+        </div>
+
+        <!-- Vision -->
+        <div class="card about-card">
+            <h2>🌍 Vision</h2>
+            <p>
+                Grameen Light is a citizen-led streetlight audit platform.
+                Villagers can report streetlight issues instantly, creating a digital bridge
+                between residents and local authorities.
+            </p>
+            <p>
+                The goal is to ensure safer nights, better maintenance,
+                and zero unnecessary electricity wastage.
+            </p>
+        </div>
+
+        <!-- Usage -->
+        <div class="card about-card">
+            <h2>📱 App Usage & User Flow</h2>
+            <div class="feature-grid">
+
+                <div class="feature-box">
+                    <h4>🗺 Pole Map</h4>
+                    <p>View all streetlight poles across the village.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h4>⚡ Quick Report</h4>
+                    <p>Report Working, Fused, or Burning During Day status instantly.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h4>🛠 Repair Tracker</h4>
+                    <p>Track complaint progress from Pending to Fixed.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h4>🌱 Energy Goal</h4>
+                    <p>Reduce energy wastage through community participation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical -->
+        <div class="card about-card">
+            <h2>💻 Technical Implementation</h2>
+            <div class="feature-grid">
+                <div class="feature-box">
+                    <h4>🔥 Real-Time Sync</h4>
+                    <p>Firebase can sync reports instantly across the village dashboard.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h4>🎨 Modern UI</h4>
+                    <p>Dark/Light themes represent night/day audit modes.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h4>🗄 Database</h4>
+                    <p>Store complaint and pole data securely for long-term records.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Impact -->
+        <div class="card about-card">
+            <h2>🌟 Impact Goals</h2>
+            <ul class="about-list">
+                <li>Improve public safety during nighttime.</li>
+                <li>Reduce electricity wastage in villages.</li>
+                <li>Enable smart village infrastructure using citizen participation.</li>
+                <li>Create faster communication between villagers and Panchayat offices.</li>
+            </ul>
+        </div>
+
+        <!-- Success -->
+        <div class="card about-card">
+            <h2>✅ Success Criteria</h2>
+            <ul class="about-list">
+                <li>Complaint IDs generated for every report.</li>
+                <li>Color-coded pole statuses visible clearly.</li>
+                <li>Simple one-tap reporting experience.</li>
+                <li>Repair progress visible to all villagers.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-left">
+            <div class="footer-links">
+                <a href="{% url 'about' %}">About</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+
+        <div class="footer-center">
+            <div class="footer-credit">
+                Built by Sahana <br>
+                   1RR22CS136
+            </div>
+        </div>
+
+        <div class="footer-right">
+            <h3>⚡ Grameen Light</h3>
+            <div class="footer-tagline">
+                Smart Village Streetlight Monitoring System
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'reports/js/theme.js' %}"></script>
+
+</body>
+</html>
